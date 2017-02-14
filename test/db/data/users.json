@@ -1,0 +1,14 @@
+{
+  "tableName": "Users",
+  "data": [
+    {
+      "id": "one",
+      "username": "juliusone"
+    },
+    {
+      "id": "two",
+      "username": "juliustwo"
+    }
+
+  ]
+}

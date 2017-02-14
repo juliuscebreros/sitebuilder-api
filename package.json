@@ -1,0 +1,37 @@
+{
+  "name": "ch-sitebuilder",
+  "version": "0.0.1",
+  "description": "Apex based serverless app builder",
+  "main": "index.js",
+  "scripts": {
+    "start-db": "java -Djava.library.path=/opt/dynamodb_local/DynamoDBLocal_lib -jar /opt/dynamodb_local/DynamoDBLocal.jar -sharedDb",
+    "test": "node_modules/.bin/_mocha --require babel-polyfill --compilers js:babel-register"
+  },
+  "keywords": [
+    "apex"
+  ],
+  "author": "julius@cloud.house",
+  "license": "ISC",
+  "dependencies": {
+    "aws-sdk": "^2.10.0",
+    "lodash": "^4.17.4",
+    "node-uuid": "^1.4.7",
+    "verror": "^1.9.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.22.1",
+    "babel-loader": "^6.2.10",
+    "babel-plugin-transform-async-to-module-method": "^6.22.0",
+    "babel-plugin-transform-promise-to-bluebird": "^1.1.1",
+    "babel-plugin-transform-runtime": "^6.22.0",
+    "babel-polyfill": "^6.22.0",
+    "babel-preset-env": "^1.1.8",
+    "babel-preset-latest": "^6.22.0",
+    "babel-preset-stage-0": "^6.22.0",
+    "babel-register": "^6.22.0",
+    "json-loader": "^0.5.4",
+    "mocha": "^3.2.0",
+    "should": "^11.2.0",
+    "webpack": "^2.2.1"
+  }
+}

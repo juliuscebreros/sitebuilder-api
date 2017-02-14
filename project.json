@@ -1,0 +1,14 @@
+{
+  "name": "ch-sitebuilder",
+  "description": "App to create websites",
+  "memory": 128,
+  "timeout": 5,
+  "role": "arn:aws:iam::624763468447:role/ch-sitebuilder_lambda_function",
+  "environment": {},
+  "runtime": "nodejs4.3",
+  "handler": "lib.default",
+  "hooks": {
+    "build": "../../node_modules/.bin/webpack --config ../../webpack.config.js",
+    "clean": "rm -fr lib"
+  }
+}

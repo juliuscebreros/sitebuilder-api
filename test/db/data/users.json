@@ -3,12 +3,21 @@
   "data": [
     {
       "id": "one",
-      "username": "juliusone"
+      "username": "juliusone",
+      "firstname": "Julius",
+      "lastname": "One"
     },
     {
       "id": "two",
-      "username": "juliustwo"
+      "username": "juliustwo",
+      "firstname": "Julius",
+      "lastname": "Two"
+    },
+    {
+      "id": "three",
+      "username": "juliusthree",
+      "firstname": "Julius",
+      "lastname": "Three"
     }
-
   ]
 }

@@ -1,0 +1,32 @@
+{
+      "TableName" : "Users",
+
+      "KeySchema": [
+          { "AttributeName": "id", "KeyType": "HASH"}
+      ],
+      "AttributeDefinitions": [
+          { "AttributeName": "id", "AttributeType": "S" },
+          { "AttributeName": "username", "AttributeType": "S" }
+      ],
+      "ProvisionedThroughput": {
+          "ReadCapacityUnits": 10,
+          "WriteCapacityUnits": 10
+      },
+      "GlobalSecondaryIndexes": [
+          {
+              "IndexName": "username",
+              "KeySchema": [{
+                  "AttributeName": "username",
+                  "KeyType": "HASH"
+              }],
+              "Projection": {
+                  "ProjectionType": "INCLUDE",
+                  "NonKeyAttributes": [ "username" ]
+              },
+              "ProvisionedThroughput": {
+                  "ReadCapacityUnits": 10,
+                  "WriteCapacityUnits": 10
+              }
+          }
+      ]
+}

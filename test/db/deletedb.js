@@ -18,17 +18,26 @@ export {
 export default function( cb ) {
     console.log( 'Deleting tables---' );
 
-    var params = {
-        TableName : "Users"
-    };
+    var tables = [
+        'Users',
+        'Sites'
+    ];
 
-    return deleteTable( params )
-        .then( ( data ) => {
-            console.log("Deleted table. Table description JSON:", JSON.stringify(data, null, 2));
-            return data
+    return Promise.all(
+        tables.map( ( item ) => {
+            var params = {
+                TableName: item
+            };
+            return deleteTable( params )
+                .catch( ( err ) => {
+                    return {};
+                });
         })
-        .catch( ( err ) => {
-            console.error("Unable to delete table. Error JSON:", JSON.stringify(err, null, 2));
-            throw new Error( err );
-        });
+    ).then( ( data ) => {
+        console.log("Deleted table. Table description JSON:", JSON.stringify(data, null, 2));
+        return data
+    }).catch( ( err ) => {
+        console.error("Unable to delete table. Error JSON:", JSON.stringify(err, null, 2));
+        throw new Error( err );
+    })
 }

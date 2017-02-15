@@ -1,0 +1,20 @@
+{
+  "tableName": "Sites",
+  "data": [
+    {
+      "ownerId": "one",
+      "id": "testone",
+      "name": "testsiteone"
+    },
+    {
+      "ownerId": "one",
+      "id": "testtwo",
+      "name": "testsitetwo"
+    },
+    {
+      "ownerId": "two",
+      "id": "testone",
+      "name": "testsitethree"
+    }
+  ]
+}

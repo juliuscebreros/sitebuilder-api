@@ -1,4 +1,7 @@
-import * as AWS from 'aws-sdk';
+import AWS from 'aws-sdk';
+
+import path from 'path';
+import fs from 'fs';
 
 AWS.config.update( {
     region: 'us-west-2',
@@ -17,47 +20,23 @@ export {
 
 export default function() {
     console.log( 'Creating tables ---' );
-    // initialize
-    let params = {
-        TableName : "Users",
 
-        KeySchema: [
-            { AttributeName: "id", KeyType: "HASH"},  //Partition key
-        ],
-        AttributeDefinitions: [
-            { AttributeName: "id", AttributeType: "S" },
-            { AttributeName: "username", AttributeType: "S" }
-        ],
-        ProvisionedThroughput: {
-            ReadCapacityUnits: 10,
-            WriteCapacityUnits: 10
-        },
-        GlobalSecondaryIndexes: [
-            {
-                IndexName: 'username',
-                KeySchema: [{
-                    AttributeName: 'username',
-                    KeyType: 'HASH'
-                }],
-                Projection: {
-                    ProjectionType: 'INCLUDE',
-                    NonKeyAttributes: [ 'username' ]
-                },
-                ProvisionedThroughput: {
-                    ReadCapacityUnits: 10,
-                    WriteCapacityUnits: 10
-                }
-            }
-        ]
-    };
+    const files = [
+        path.join( __dirname, './schema/sites.json' ),
+        path.join( __dirname, './schema/users.json' )
+    ];
 
-    return createTable( params )
-        .then( ( data ) => {
-            console.log("Created table. Table description JSON:", JSON.stringify(data, null, 2));
-            return data;
+    return Promise.all(
+        files.map( ( filename ) => {
+            const schema = fs.readFileSync( filename, 'utf8' );
+            console.log( schema );
+            return createTable( JSON.parse( schema ) );
         })
-        .catch( ( err ) => {
-            console.error("Unable to create table. Error JSON:", JSON.stringify(err, null, 2));
-            throw new Error( err );
-        });
+    ).then( ( result ) => {
+        return result;
+    })
+    .catch( ( err ) => {
+        console.error("Unable to create table. Error JSON:", JSON.stringify(err, null, 2));
+        throw new Error( err );
+    });
 }

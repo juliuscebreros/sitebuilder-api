@@ -1,0 +1,16 @@
+{
+      "TableName" : "Sites",
+
+      "KeySchema": [
+          { "AttributeName": "ownerId", "KeyType": "HASH"},
+          { "AttributeName": "id", "KeyType": "RANGE"}
+      ],
+      "AttributeDefinitions": [
+          { "AttributeName": "ownerId", "AttributeType": "S" },
+          { "AttributeName": "id", "AttributeType": "S" }
+      ],
+      "ProvisionedThroughput": {
+          "ReadCapacityUnits": 10,
+          "WriteCapacityUnits": 10
+      }
+}

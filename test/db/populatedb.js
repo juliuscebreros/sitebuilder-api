@@ -40,14 +40,22 @@ export {
 export default function() {
     // load sample database
 
-    return populateTable( path.join( __dirname, './data/users.json' ) )
-        .then( ( data ) => {
-            console.log( data );
-            console.log("Populated. Table description JSON:", JSON.stringify(data, null, 2));
-            return data
+    const files = [
+        path.join( __dirname, './data/users.json' ),
+        path.join( __dirname, './data/sites.json' )
+    ];
+
+    return Promise.all(
+        files.map( ( filename ) => {
+            return populateTable( filename );
         })
-        .catch( ( err ) => {
-            console.error("Unable to populate table. Error JSON:", JSON.stringify(err, null, 2));
-            throw new Error( err );
-        });
+    ).then( ( data ) => {
+        console.log( data );
+        console.log("Populated. Table description JSON:", JSON.stringify(data, null, 2));
+        return data
+    })
+    .catch( ( err ) => {
+        console.error("Unable to populate table. Error JSON:", JSON.stringify(err, null, 2));
+        throw new Error( err );
+    });
 }
